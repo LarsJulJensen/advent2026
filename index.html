@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Adventskalender</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:linear-gradient(#0b2242,#1e4c8f);
+    text-align:center;
+    color:white;
+    overflow-x:hidden;
+}
+
+.lights{
+    height:60px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        red 0 20px,
+        yellow 20px 40px,
+        lime 40px 60px,
+        cyan 60px 80px
+      );
+}
+
+header{
+    padding:40px 20px;
+}
+
+h1{
+    color:#ffd700;
+    text-shadow:2px 2px 5px black;
+}
+
+.calendar{
+    max-width:900px;
+    margin:auto;
+    padding:30px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.door{
+    background:#b91c1c;
+    border:5px solid #ffd700;
+    border-radius:16px;
+    min-height:220px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:4rem;
+    color:white;
+    text-decoration:none;
+
+    transition:.3s;
+    box-shadow:0 0 15px rgba(255,215,0,.5);
+}
+
+.door:hover{
+    transform:scale(1.05);
+}
+
+.snowflake{
+    position:fixed;
+    top:-20px;
+    color:white;
+    pointer-events:none;
+    animation-name:fall;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+}
+
+@keyframes fall {
+    to {
+        transform:translateY(110vh);
+    }
+}
+
+@media(max-width:700px)
+{
+    .calendar{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+
+<script src="advent.js"></script>
+
+</head>
+<body>
+
+<div class="lights"></div>
+
+<header>
+    <h1>🎄 Adventskalender 🎄</h1>
+
+    <p>
+        Klik på lågerne efterhånden som adventssøndagene kommer.
+    </p>
+</header>
+
+<div class="calendar">
+
+    <a class="door"
+       href="#"
+       onclick="openDoor(1,'advent1.html');return false;">
+       1
+    </a>
+
+    <a class="door"
+       href="#"
+       onclick="openDoor(2,'advent2.html');return false;">
+       2
+    </a>
+
+    <a class="door"
+       href="#"
+       onclick="openDoor(3,'advent3.html');return false;">
+       3
+    </a>
+
+    <a class="door"
+       href="#"
+       onclick="openDoor(4,'advent4.html');return false;">
+       4
+    </a>
+
+</div>
+
+<script>
+
+document.querySelectorAll('.door').forEach(door => {
+
+    const num = parseInt(door.textContent.trim());
+
+    if (!canOpenDoor(num)) {
+        door.style.background = '#666';
+        door.innerHTML = `🔒<br>${num}`;
+    }
+
+});
+
+for(let i=0;i<70;i++){
+
+    const snow = document.createElement('div');
+
+    snow.className='snowflake';
+    snow.innerHTML='❄';
+
+    snow.style.left=Math.random()*100+'vw';
+    snow.style.fontSize=(10+Math.random()*20)+'px';
+    snow.style.animationDuration=(5+Math.random()*12)+'s';
+
+    document.body.appendChild(snow);
+}
+
+</script>
+
+</body>
+</html>
