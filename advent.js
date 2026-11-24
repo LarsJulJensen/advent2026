@@ -2,7 +2,7 @@ const adventDates = {
     1: new Date('2026-11-29'),
     2: new Date('2026-12-06'),
     3: new Date('2026-12-13'),
-    4: new Date('2026-12-20')
+    4: new Date('2026-11-20')
 };
 
 function normalizeDate(date) {
